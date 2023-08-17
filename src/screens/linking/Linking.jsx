@@ -1,6 +1,8 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Card from "../../components/card";
 import { Ring } from "@uiball/loaders";
+import styles from "./Linking.module.css";
+import globalStyles from "../../Styles.module.css";
 
 const Linking = () => {
   const navigate = useNavigate();
@@ -34,11 +36,12 @@ const Linking = () => {
 
   return (
     <Card>
-      <div className="linking">
-        <div className="loader">
+      <div className={styles.container}>
+        <div className={styles.spinner}>
           <Ring size={72} color="#6936F5" />
         </div>
-        <h1 className="success__h1">Linking Account...</h1>
+        {/* TODO: rename class */}
+        <h1 className={globalStyles.h1}>Linking Account...</h1>
       </div>
     </Card>
   );

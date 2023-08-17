@@ -9,6 +9,8 @@ import {
 } from "@fortawesome/pro-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/opentrade_logo.svg";
+import styles from "./Welcome.module.css";
+import globalStyles from "../../Styles.module.css";
 
 const Welcome = () => {
   const { id } = useParams();
@@ -20,44 +22,47 @@ const Welcome = () => {
   localStorage.setItem("lp_id", id);
 
   return (
-    <div className="card">
-      <nav className="welcome-navbar">
-        <FontAwesomeIcon className="navbar-icon" icon={faXmark} />
+    <div className={globalStyles.card}>
+      <nav className={styles.navbar}>
+        <FontAwesomeIcon className={globalStyles.navbarIcon} icon={faXmark} />
       </nav>
-      <div className="welcome">
-        <div className="logo-container">
-          <div className="sample-logo-container">
-            <FontAwesomeIcon className="sample-logo" icon={faImage} />
+      <div className={styles.container}>
+        <div className={globalStyles.logoContainer}>
+          <div className={styles.sampleLogoContainer}>
+            <FontAwesomeIcon className={styles.sampleLogo} icon={faImage} />
           </div>
-          <FontAwesomeIcon className="arrows" icon={faArrowsLeftRight} />
-          <Logo className="opentrade-logo" />
+          <FontAwesomeIcon className={globalStyles.arrows} icon={faArrowsLeftRight} />
+          <Logo className={styles.opentradeLogo} />
         </div>
-        <h1 className="welcome__h1">
-          This application uses <b className="opentrade-inline">opentrade</b> to
+        <h1 className={styles.header}>
+          This application uses <b className={styles.focus}>opentrade</b> to
           connect to your trading account
         </h1>
-        <div className="checklist-item">
-          <FontAwesomeIcon className="checklist-icon" icon={faLink} />
-          <div className="checklist-body">
-            <h2 className="welcome__h2">Connect effortlessly</h2>
+
+        <div className={styles.checklistItem}>
+          <FontAwesomeIcon className={styles.checklistIcon} icon={faLink} />
+          <div className={styles.checklistBody}>
+            <h2 className={styles.subheader}>Connect effortlessly</h2>
             <p>
               Opentrade lets you securely connect your trading accounts in
               seconds
             </p>
           </div>
         </div>
-        <div className="checklist-item">
-          <FontAwesomeIcon className="checklist-icon" icon={faShieldCheck} />
-          <div className="checklist-body">
-            <h2 className="welcome__h2">Your data belongs to you</h2>
+
+        <div className={styles.checklistItem}>
+          <FontAwesomeIcon className={styles.checklistIcon} icon={faShieldCheck} />
+          <div className={styles.checklistBody}>
+            <h2 className={styles.subheader}>Your data belongs to you</h2>
             <p>
               Opentrade doesn't sell personal info, and will only use it with
               your permission
             </p>
           </div>
         </div>
+
         <button
-          class="button"
+          className={globalStyles.button}
           onClick={() => {
             navigate(`/link_portals/${id}/select_institution`);
           }}

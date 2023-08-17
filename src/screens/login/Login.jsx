@@ -6,6 +6,8 @@ import Card from "../../components/card";
 import institution_data from "../../data/institutions";
 import { ReactComponent as Logo } from "../../assets/opentrade_logo_white.svg";
 import { Ring } from "@uiball/loaders";
+import styles from "./Login.module.css";
+import globalStyles from "../../Styles.module.css";
 
 const Login = () => {
   const { id } = useParams();
@@ -90,19 +92,19 @@ const Login = () => {
 
   return (
     <Card>
-      <form action="" className="login">
-        <div className="login-logo-container">
-          <Logo className="login__logo" />
-          <FontAwesomeIcon className="arrows" icon={faArrowsLeftRight} />
-          <img className="login__logo" src={institution_logo} alt="" />
+      <form action="" className={styles.container}>
+        <div className={styles.logoContainer}>
+          <Logo className={styles.logo} />
+          <FontAwesomeIcon className={globalStyles.arrows} icon={faArrowsLeftRight} />
+          <img className={styles.logo} src={institution_logo} alt="" />
         </div>
-        <h1 class="login__h1">Log in to {institution_name}</h1>
-        <p class="login-text">
+        <h1 className={styles.header}>Log in to {institution_name}</h1>
+        <p class={styles.text}>
           By providing your credentials, you're enabling Opentrade to retrieve
           your investment data.
         </p>
         <input
-          className="input-field"
+          className={globalStyles.inputField}
           required
           type="email"
           id="email"
@@ -113,7 +115,7 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          className="input-field"
+          className={globalStyles.inputField}
           required
           type="password"
           id="password"
@@ -123,7 +125,7 @@ const Login = () => {
         />
         {displayMFAInput && (
           <input
-            className="input-field"
+            className={globalStyles.inputField}
             required
             type="text"
             id="smsCode"
@@ -132,10 +134,10 @@ const Login = () => {
             onChange={(e) => setMFACode(e.target.value)}
           />
         )}
-        <button className="button" disabled={loading} onClick={handleSubmit}>
+        <button className={globalStyles.button} disabled={loading} onClick={handleSubmit}>
           {loading ? <Ring size={32} color="white" /> : "Submit"}
         </button>
-        <a href="#" class="forgot-password">
+        <a href="#" class={styles.footer}>
           Forgot your password?
         </a>
       </form>

@@ -29,7 +29,7 @@ const Institution = ({ institution, lp_id }) => {
         <p className={styles.link}>{institution.link}</p>
       </div>
       <div className={styles.chevronContainer}>
-        <FontAwesomeIcon className="chevron" icon={faChevronRight} />
+        <FontAwesomeIcon className={styles.chevron} icon={faChevronRight} />
       </div>
     </InstitutionLink>
   );

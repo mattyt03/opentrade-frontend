@@ -1,0 +1,82 @@
+/* 
+// navbar-icon
+// logo-container
+// sample-logo-container
+// sample-logo
+// opentrade-logo*/
+
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 1.5rem;
+}
+
+/* TODO: rename this to h1? */
+.header {
+  text-align: center;
+  font-size: 1.3rem;
+  padding: 1rem;
+  font-weight: normal;
+}
+
+.subheader {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  font-weight: 650;
+}
+
+.checklistItem {
+  padding: 1rem;
+  display: flex;
+  width: 100%;
+}
+
+.checklistBody {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.checklistIcon {
+  color: var(--text-color-primary);
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+.focus {
+  color: var(--color-primary);
+  font-size: 1.3rem;
+  font-weight: 650;
+}
+
+.opentradeLogo {
+  width: 3rem;
+  height: 3rem;
+}
+
+.sampleLogoContainer {
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background-color: lightgrey;
+}
+
+.sampleLogo {
+  height: 1.5rem;
+  width: 1.5rem;
+  color: grey;
+}

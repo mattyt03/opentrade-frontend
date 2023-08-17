@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import Institution from "../../components/institution";
 import institution_data from "../../data/institutions";
 import Card from "../../components/card";
+import styles from "./SelectInstitution.module.css";
 
 const SelectInstitution = () => {
   const { id: lp_id } = useParams();
@@ -15,10 +16,10 @@ const SelectInstitution = () => {
 
   return (
     <Card>
-      <h1 className="select_institution__h1">Select your trading platform</h1>
-      <ul className="institutions">
+      <h1 className={styles.header}>Select your trading platform</h1>
+      <ul className={styles.institutionsContainer}>
         {institutionItems}
-        <footer className="footer">
+        <footer className={styles.footer}>
           <a href="#">Don't see your institution?</a>
         </footer>
       </ul>

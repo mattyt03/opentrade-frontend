@@ -32,3 +32,8 @@
   margin-right: 1rem;
   margin-left: auto;
 }
+
+.chevron {
+  color: var(--text-color-primary);
+  font-size: 1rem;
+}
