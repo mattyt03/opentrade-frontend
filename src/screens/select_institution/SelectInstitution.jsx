@@ -6,7 +6,6 @@ import styles from "./SelectInstitution.module.css";
 import globalStyles from "../../Styles.module.css";
 
 const SelectInstitution = () => {
-  // comment
   const { id: lp_id } = useParams();
 
   return (
