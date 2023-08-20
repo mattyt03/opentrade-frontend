@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Institution.module.css";
+import globalStyles from "../../Styles.module.css";
 
 const Institution = ({ institution, lp_id }) => {
   const updateInstitution = () => {
@@ -23,7 +24,7 @@ const Institution = ({ institution, lp_id }) => {
       href={loginUrl}
     >
       {/* Eventually switch to svg images */}
-      <img src={institution.logo} alt="" className={styles.logo} />
+      <img src={institution.logo} alt="" className={[globalStyles.logo, styles.logo].join(' ')} />
       <div className={styles.body}>
         <h3 className={styles.name}>{institution.name}</h3>
         <p className={styles.link}>{institution.link}</p>

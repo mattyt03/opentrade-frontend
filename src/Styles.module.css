@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;650;700&display=swap");
 
 :root {
-  --color-primary: #6936F5;
+  --color-background: rgba(144, 144, 144, 0.98);
+  --color-card: white;
+  --color-primary: #6936f5;
   --color-border: #ededed;
   --text-color-primary: #333;
   --text-color-light: #777;
@@ -9,7 +11,9 @@
 }
 
 /* base styles */
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
   margin: 0;
   font-family: "Montserrat";
@@ -17,7 +21,7 @@
 }
 
 body {
-  background-color: rgba(144, 144, 144, 0.98);
+  background-color: var(--color-background);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,80 +30,33 @@ body {
   line-height: 1.5;
 }
 
-.card {
+.container {
   display: flex;
   flex-direction: column;
-  /* fix these */
-  height: 608px;
-  width: 360px;
-  border-radius: 16px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,.2);
-  background-color: white;
-  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 1.5rem;
 }
 
 .h1 {
-  text-align: center;
   /* align-self: flex-start; */
   padding-bottom: 0.5rem;
   font-size: 1.6rem;
   font-weight: 650;
 }
 
-/* double underscore for name? */
-.navbarIcon {
-  color: var(--text-color-primary);
-  /* font-size: 1.2rem; */
-  width: 1.25rem;
-  height: 1.25rem;
-  padding: 1rem;
-  cursor: pointer;
-}
-
-.inputField {
-  width: 100%;
-  height: 3rem;
-  margin: 0.25rem;
-  padding: 0 10px;
-  font-size: 1rem;
-  border: 2px solid #ddd;
-  border-radius: var(--border-radius);
-}
-
-.inputField:focus {
-  outline: none;
-  border-color: #a485f9;
-  box-shadow: 0 0 0 0.2rem rgba(164, 133, 249, .25);
-}
-
-::placeholder {
-  text-align: left;
-  /* text-align: center; */
-  font-size: 1rem;
-  color: var(--text-color-light);
-}
-
-/* .button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-} */
-
-/* double underscore for name? */
 .button {
   background: var(--color-primary);
-  /* the margins get added when you do flex (as opposed to the max being taken) */
+  /* the margins get added when you do flex (instead of the max being taken) */
   width: 100%;
   height: 3rem;
   margin: 1rem;
   /* margin-bottom: 0; */
   border: 0;
   border-radius: 2rem;
-  color: white;
+  color: var(--color-card);
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
@@ -111,8 +68,10 @@ body {
   padding: 0;
 }
 
-.checkmark {
-  margin-bottom: 1rem;
+.logo {
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: var(--border-radius);
 }
 
 .logoContainer {

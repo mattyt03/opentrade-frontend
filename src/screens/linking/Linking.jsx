@@ -6,42 +6,45 @@ import globalStyles from "../../Styles.module.css";
 
 const Linking = () => {
   const navigate = useNavigate();
-  //   this should be part of a useEffect hook
-  const lp_id = localStorage.getItem("lp_id");
-  const institution = localStorage.getItem("lp_institution");
-  const [searchParams, setSearchParams] = useSearchParams();
-  let code = searchParams.get("code");
-  // code was automatically decoded, so we need to re-encode it
-  code = encodeURIComponent(code);
 
-  const return_url = `http://127.0.0.1:8000/link_portals/${lp_id}/return/?institution=${institution}&code=${code}`;
+  useEffect(() => {
+    const lp_id = localStorage.getItem("lp_id");
+    const institution = localStorage.getItem("lp_institution");
+    const [searchParams, setSearchParams] = useSearchParams();
+    let code = searchParams.get("code");
+    // code was automatically decoded, so we need to re-encode it
+    code = encodeURIComponent(code);
 
-  fetch(return_url, {
-    method: "GET",
-  })
-    .then((res) => {
-      // console.log(res);
-      return res.json();
+    const return_url = `http://127.0.0.1:8000/link_portals/${lp_id}/return/?institution=${institution}&code=${code}`;
+
+    fetch(return_url, {
+      method: "GET",
     })
-    .then((data) => {
-      if ("detail" in data) {
-        throw Error(data["error"]);
-      }
-      // console.log(data);
-      navigate(`/link_portals/success/`);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+      .then((res) => {
+        // console.log(res);
+        return res.json();
+      })
+      .then((data) => {
+        if ("detail" in data) {
+          throw Error(data["error"]);
+        }
+        // console.log(data);
+        navigate(`/link_portals/success/`);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
   return (
     <Card>
-      <div className={styles.container}>
-        <div className={styles.spinner}>
+      <div className={globalStyles.container}>
+        <div>
           <Ring size={72} color="#6936F5" />
         </div>
-        {/* TODO: rename class */}
-        <h1 className={globalStyles.h1}>Linking Account...</h1>
+        <h1 className={[globalStyles.h1, styles.h1].join(" ")}>
+          Linking Account...
+        </h1>
       </div>
     </Card>
   );

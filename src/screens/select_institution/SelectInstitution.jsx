@@ -3,22 +3,23 @@ import Institution from "../../components/institution";
 import institution_data from "../../data/institutions";
 import Card from "../../components/card";
 import styles from "./SelectInstitution.module.css";
+import globalStyles from "../../Styles.module.css";
 
 const SelectInstitution = () => {
   const { id: lp_id } = useParams();
-  const institutionItems = Object.entries(institution_data).map(
-    ([id, institution]) => (
-      <li>
-        <Institution institution={{ id, ...institution }} lp_id={lp_id} />
-      </li>
-    )
-  );
 
   return (
     <Card>
-      <h1 className={styles.header}>Select your trading platform</h1>
-      <ul className={styles.institutionsContainer}>
-        {institutionItems}
+      <h1 className={[globalStyles.h1, styles.h1].join(" ")}>
+        Select your trading platform
+      </h1>
+      <ul className={styles.listContainer}>
+        {Object.entries(institution_data).map(([id, institution]) => (
+          <li>
+            {/* Doesn't make sense to pass down lp_id to each component*/}
+            <Institution institution={{ id, ...institution }} lp_id={lp_id} />
+          </li>
+        ))}
         <footer className={styles.footer}>
           <a href="#">Don't see your institution?</a>
         </footer>

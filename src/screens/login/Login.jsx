@@ -13,7 +13,6 @@ const Login = () => {
   const { id } = useParams();
   // getting the query params takes an extra step
   // use local storage instead?
-  const [searchParams, setSearchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +20,8 @@ const Login = () => {
   const [MFACode, setMFACode] = useState("");
   const [deviceToken, setDeviceToken] = useState("");
   const navigate = useNavigate();
-
+  
+  const [searchParams, setSearchParams] = useSearchParams();
   const institution = searchParams.get("institution");
   const institution_logo = institution_data[institution]["logo"];
   const institution_name = institution_data[institution]["name"];
@@ -92,19 +92,19 @@ const Login = () => {
 
   return (
     <Card>
-      <form action="" className={styles.container}>
-        <div className={styles.logoContainer}>
-          <Logo className={styles.logo} />
+      <form action="" className={globalStyles.container}>
+        <div className={[globalStyles.logoContainer, styles.logoContainer].join(' ')}>
+          <Logo className={globalStyles.logo} />
           <FontAwesomeIcon className={globalStyles.arrows} icon={faArrowsLeftRight} />
-          <img className={styles.logo} src={institution_logo} alt="" />
+          <img className={globalStyles.logo} src={institution_logo} alt="" />
         </div>
-        <h1 className={styles.header}>Log in to {institution_name}</h1>
+        <h1 className={[globalStyles.h1, styles.h1].join(' ')}>Log in to {institution_name}</h1>
         <p class={styles.text}>
           By providing your credentials, you're enabling Opentrade to retrieve
           your investment data.
         </p>
         <input
-          className={globalStyles.inputField}
+          className={styles.inputField}
           required
           type="email"
           id="email"
@@ -115,7 +115,7 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          className={globalStyles.inputField}
+          className={styles.inputField}
           required
           type="password"
           id="password"
@@ -125,7 +125,7 @@ const Login = () => {
         />
         {displayMFAInput && (
           <input
-            className={globalStyles.inputField}
+            className={styles.inputField}
             required
             type="text"
             id="smsCode"

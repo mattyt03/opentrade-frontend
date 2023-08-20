@@ -5,18 +5,20 @@ import { ReactComponent as Logo } from "../../assets/opentrade.svg";
 import styles from "./Card.module.css";
 import globalStyles from "../../Styles.module.css";
 
+
+// TODO: add param for hiding back button
 const Card = ({ children }) => {
   const navigate = useNavigate();
 
   return (
-    <div className={globalStyles.card}>
+    <div className={styles.container}>
       <nav className={styles.navbar}>
         <button className={styles.iconContainer} onClick={() => navigate(-1)}>
-          <FontAwesomeIcon className={globalStyles.navbarIcon} icon={faArrowLeft} />
+          <FontAwesomeIcon className={styles.icon} icon={faArrowLeft} />
         </button>
         <Logo className={styles.logo} />
         <button className={styles.iconContainer}>
-          <FontAwesomeIcon className={globalStyles.navbarIcon} icon={faXmark} />
+          <FontAwesomeIcon className={styles.icon} icon={faXmark} />
         </button>
       </nav>
       {children}

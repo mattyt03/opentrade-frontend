@@ -6,11 +6,11 @@ import globalStyles from "../../Styles.module.css";
 const Success = () => {
   return (
     <Card>
-      <div className={styles.container}>
+      <div className={globalStyles.container}>
         {/* putting the checkmark in a div fucks things up */}
         {/* make the color a global variable */}
         <Checkmark size="xLarge" color="#6936F5"/>
-        <h1 className={globalStyles.h1}>Success!</h1>
+        <h1 className={[globalStyles.h1, styles.h1].join(" ")}>Success!</h1>
         <p className={styles.text}>
           Your account has been successfully linked to this application.
         </p>

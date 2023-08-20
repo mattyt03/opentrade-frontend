@@ -1,14 +1,12 @@
-.institutionsContainer {
+.listContainer {
   overflow: hidden auto;
   list-style-type: none;
   padding: 0;
   width: 100%;
 }
 
-.header {
+.h1 {
   text-align: left;
-  font-size: 1.6rem;
-  font-weight: 650;
   padding: 0 1.5rem 0.5rem;
 }
 

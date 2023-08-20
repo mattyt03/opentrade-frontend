@@ -1,7 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /* changes these to rem */
+  height: 608px;
+  width: 360px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  background-color: var(--color-card);
+  overflow: hidden;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.5rem;
+  width: 100%;
 }
 
 .logo {
@@ -21,7 +34,7 @@
 }
 
 .iconContainer {
-  background-color: white;
+  background-color: var(--color-card);
   border: none;
   cursor: pointer;
   padding: 0;
