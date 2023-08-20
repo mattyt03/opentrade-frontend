@@ -13,7 +13,7 @@ const Institution = ({ institution, lp_id }) => {
   // http://127.0.0.1:8000
   // https://opentrade.herokuapp.com
   const loginUrl = institution.redirect
-    ? `http://127.0.0.1:8000/link_portals/${lp_id}/redirect?institution=${institution.id}`
+    ? `https://opentrade.herokuapp.com/link_portals/${lp_id}/redirect?institution=${institution.id}`
     : `/link_portals/${lp_id}/login/?institution=${institution.id}`;
 
   return (

@@ -15,7 +15,7 @@ const Linking = () => {
     // code was automatically decoded, so we need to re-encode it
     code = encodeURIComponent(code);
 
-    const return_url = `http://127.0.0.1:8000/link_portals/${lp_id}/return/?institution=${institution}&code=${code}`;
+    const return_url = `https://opentrade.herokuapp.com/link_portals/${lp_id}/return/?institution=${institution}&code=${code}`;
 
     fetch(return_url, {
       method: "GET",

@@ -39,7 +39,7 @@ const Login = () => {
     if (displayMFAInput === false) {
       // don't hardcode urls!!
 
-      fetch(`http://127.0.0.1:8000/link_portals/${id}/login`, {
+      fetch(`https://opentrade.herokuapp.com/link_portals/${id}/login`, {
         method: "POST",
         body: formData,
       })
@@ -68,7 +68,7 @@ const Login = () => {
     } else {
       formData.append("mfa_code", MFACode);
       formData.append("device_token", deviceToken);
-      fetch(`http://127.0.0.1:8000/link_portals/${id}/mfa`, {
+      fetch(`https://opentrade.herokuapp.com/link_portals/${id}/mfa`, {
         method: "POST",
         body: formData,
       })
