@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/link_portals/(.*)", "destination": "/index.html" }]
+}
