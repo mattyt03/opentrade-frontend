@@ -10,10 +10,8 @@ const Institution = ({ institution, lp_id }) => {
   };
 
   const InstitutionLink = institution.redirect ? "a" : Link;
-  // http://127.0.0.1:8000
-  // https://opentrade.herokuapp.com
   const loginUrl = institution.redirect
-    ? `https://opentrade.herokuapp.com/link_portals/${lp_id}/redirect?institution=${institution.id}`
+    ? `${import.meta.env.VITE_API_URL}/link_portals/${lp_id}/redirect?institution=${institution.id}`
     : `/link_portals/${lp_id}/login/?institution=${institution.id}`;
 
   return (
