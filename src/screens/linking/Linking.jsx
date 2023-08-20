@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Ring } from "@uiball/loaders";
 import styles from "./Linking.module.css";
 import globalStyles from "../../Styles.module.css";
+import axios, { CanceledError } from "axios";
 
 const Linking = () => {
   const navigate = useNavigate();
@@ -12,24 +13,19 @@ const Linking = () => {
   useEffect(() => {
     const lp_id = localStorage.getItem("lp_id");
     const institution = localStorage.getItem("lp_institution");
+
     let code = searchParams.get("code");
     // code was automatically decoded, so we need to re-encode it
     code = encodeURIComponent(code);
 
-    const return_url = `${import.meta.env.VITE_API_URL}/link_portals/${lp_id}/return/?institution=${institution}&code=${code}`;
+    const return_url = `${
+      import.meta.env.VITE_API_URL
+    }/link_portals/${lp_id}/return/?institution=${institution}&code=${code}`;
 
-    fetch(return_url, {
-      method: "GET",
-    })
-      .then((res) => {
-        // console.log(res);
-        return res.json();
-      })
-      .then((data) => {
-        if ("detail" in data) {
-          throw Error(data["error"]);
-        }
-        // console.log(data);
+    axios
+      .get(return_url)
+      .then(({ data }) => {
+        console.log(data);
         navigate(`/link_portals/success/`);
       })
       .catch((err) => {

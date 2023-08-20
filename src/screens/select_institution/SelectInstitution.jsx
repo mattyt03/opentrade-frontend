@@ -15,7 +15,7 @@ const SelectInstitution = () => {
       </h1>
       <ul className={styles.listContainer}>
         {Object.entries(institution_data).map(([id, institution]) => (
-          <li>
+          <li key={id}>
             {/* Doesn't make sense to pass down lp_id to each component*/}
             <Institution institution={{ id, ...institution }} lp_id={lp_id} />
           </li>
