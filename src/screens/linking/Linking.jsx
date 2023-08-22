@@ -22,15 +22,20 @@ const Linking = () => {
       import.meta.env.VITE_API_URL
     }/link_portals/${lp_id}/return/?institution=${institution}&code=${code}`;
 
+    const controller = new AbortController();
     axios
-      .get(return_url)
+      .get(return_url, {
+        signal: controller.signal,
+      })
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         navigate(`/link_portals/success/`);
       })
       .catch((err) => {
         console.log(err.message);
       });
+
+    return () => controller.abort();
   }, []);
 
   return (

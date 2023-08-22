@@ -7,23 +7,36 @@ import { Ring } from "@uiball/loaders";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import axios, { CanceledError } from "axios";
-// import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Card from "../../components/card";
 import institution_data from "../../data/institutions";
 import styles from "./Login.module.css";
 import globalStyles from "../../Styles.module.css";
 
-// add zod
 // refactor axios requests
-// add error handling
-// add abort controller
+// make a custom hook for login
+// add error handling (invalid credentials, bad conflict, internal server error)
+
+const schema = z.object({
+  email: z
+    .string()
+    .nonempty({ message: "Please provide an email." })
+    .email({ message: "Email is invalid." }),
+  password: z.string().nonempty({ message: "Please provide a password." }),
+  mfaCode: z
+    .string()
+    .length(6, { message: "MFA Code must be a 6-digit number." })
+    .optional(),
+});
 
 const Login = () => {
   const { id } = useParams();
   // getting the query params takes an extra step
-  // use local storage instead?
+  // add to local storage?
+  const [invalidSubmission, setInvalidSubmission] = useState(false);
   const [loading, setLoading] = useState(false);
   const [displayMFA, setDisplayMFA] = useState(false);
+  // add to local storage?
   const [deviceToken, setDeviceToken] = useState("");
   const navigate = useNavigate();
 
@@ -36,7 +49,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: zodResolver(schema) });
 
   const onSubmit = (data) => {
     // e.preventDefault();
@@ -44,7 +57,7 @@ const Login = () => {
     setLoading(true);
 
     const formData = new FormData();
-    formData.append("email", data.username);
+    formData.append("email", data.email);
     formData.append("password", data.password);
 
     if (displayMFA === false) {
@@ -55,7 +68,7 @@ const Login = () => {
         )
         .then(({ data }) => {
           setDisplayMFA(true);
-          setDeviceToken(data["device_token"]);
+          setDeviceToken(data.device_token);
         })
         .catch((err) => {
           console.log(err.message);
@@ -79,13 +92,14 @@ const Login = () => {
           setLoading(false);
         });
     }
+    setInvalidSubmission(false);
   };
 
   return (
     <Card>
       <form
         className={globalStyles.container}
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit, () => setInvalidSubmission(true))}
       >
         <div
           className={[globalStyles.logoContainer, styles.logoContainer].join(
@@ -102,18 +116,21 @@ const Login = () => {
         <h1 className={[globalStyles.h1, styles.h1].join(" ")}>
           Log in to {institution_name}
         </h1>
-        <p className={styles.text}>
+        <p className={[globalStyles.text, styles.text].join(" ")}>
           By providing your credentials, you're enabling Opentrade to retrieve
           your investment data.
         </p>
         <input
-          {...register("username")}
+          {...register("email")}
           type="text"
-          id="username"
-          placeholder="Username"
+          id="email"
+          placeholder="Email"
           className={styles.inputField}
           // name?
         />
+        {errors.email && invalidSubmission && (
+          <p className={[globalStyles.text, styles.errorText].join(" ")}>{errors.email.message}</p>
+        )}
         <input
           {...register("password")}
           type="password"
@@ -121,6 +138,9 @@ const Login = () => {
           placeholder="Password"
           className={styles.inputField}
         />
+        {errors.password && invalidSubmission && (
+          <p className={[globalStyles.text, styles.errorText].join(" ")}>{errors.password.message}</p>
+        )}
         {displayMFA && (
           <input
             {...register("mfaCode")}
@@ -129,6 +149,9 @@ const Login = () => {
             placeholder="MFA Code"
             className={styles.inputField}
           />
+        )}
+        {errors.mfaCode && invalidSubmission && (
+          <p className={[globalStyles.text, styles.errorText].join(" ")}>{errors.mfaCode.message}</p>
         )}
         <button
           className={globalStyles.button}

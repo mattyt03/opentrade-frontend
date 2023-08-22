@@ -5,7 +5,7 @@ import styles from "./Institution.module.css";
 import globalStyles from "../../Styles.module.css";
 
 const Institution = ({ institution, lp_id }) => {
-  const updateInstitution = () => {
+  const handleClick = () => {
     localStorage.setItem("lp_institution", institution.id);
   };
 
@@ -16,7 +16,7 @@ const Institution = ({ institution, lp_id }) => {
 
   return (
     <InstitutionLink
-      onClick={updateInstitution}
+      onClick={handleClick}
       className={styles.container}
       to={loginUrl}
       href={loginUrl}

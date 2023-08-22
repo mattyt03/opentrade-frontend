@@ -9,12 +9,12 @@
 }
 
 .text {
-  text-align: left;
-  font-size: 0.9rem;
-  /* align-self: flex-start; */
-  padding: 0;
   padding-bottom: 0.5rem;
   color: var(--text-color-light);
+}
+
+.errorText {
+  color: var(--text-color-danger);
 }
 
 .inputField {

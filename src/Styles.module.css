@@ -7,6 +7,7 @@
   --color-border: #ededed;
   --text-color-primary: #333;
   --text-color-light: #777;
+  --text-color-danger: #dc3545;
   --border-radius: 8px;
 }
 
@@ -45,6 +46,13 @@ body {
   padding-bottom: 0.5rem;
   font-size: 1.6rem;
   font-weight: 650;
+}
+
+.text {
+  text-align: left;
+  align-self: flex-start;
+  font-size: 0.9rem;
+  padding: 0;
 }
 
 .button {
