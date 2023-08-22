@@ -49,7 +49,7 @@
 .errorContainer {
   align-self: start;
   display: flex;
-  background-color: var(--color-light);
+  background-color: #eaecee;
   border-radius: var(--border-radius);
   padding: 0.5rem;
   margin-bottom: 0.5rem;
