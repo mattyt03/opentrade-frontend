@@ -33,7 +33,7 @@ const Linking = () => {
       })
       .catch((err) => {
         if (err.response.status === 409) {
-          navigate(`/link_portals/${id}/already_linked/`);
+          navigate(`/link_portals/${lp_id}/already_linked/`);
         }
       });
 
