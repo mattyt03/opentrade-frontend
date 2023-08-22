@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faXmark } from "@fortawesome/pro-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/opentrade.svg";
 import styles from "./Card.module.css";

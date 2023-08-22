@@ -12,10 +12,10 @@ import Card from "../../components/card";
 import institution_data from "../../data/institutions";
 import styles from "./Login.module.css";
 import globalStyles from "../../Styles.module.css";
+import { faCircleXmark } from "@fortawesome/pro-regular-svg-icons";
 
 // refactor axios requests
 // make a custom hook for login
-// add error handling (invalid credentials, bad conflict, internal server error)
 
 const schema = z.object({
   email: z
@@ -33,7 +33,8 @@ const Login = () => {
   const { id } = useParams();
   // getting the query params takes an extra step
   // add to local storage?
-  const [invalidSubmission, setInvalidSubmission] = useState(false);
+  const [schemaError, setSchemaError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [displayMFA, setDisplayMFA] = useState(false);
   // add to local storage?
@@ -63,15 +64,20 @@ const Login = () => {
     if (displayMFA === false) {
       axios
         .post(
-          `${import.meta.env.VITE_API_URL}/link_portals/${id}/login?institution=${institution}`,
+          `${
+            import.meta.env.VITE_API_URL
+          }/link_portals/${id}/login?institution=${institution}`,
           formData
         )
         .then(({ data }) => {
           setDisplayMFA(true);
           setDeviceToken(data.device_token);
+          setErrorMessage(null);
         })
         .catch((err) => {
-          console.log(err.message);
+          if (err.response.status === 400) {
+            setErrorMessage("Invalid username or password.");
+          }
         })
         .finally(() => {
           setLoading(false);
@@ -81,25 +87,34 @@ const Login = () => {
       formData.append("device_token", deviceToken);
       axios
         .post(
-          `${import.meta.env.VITE_API_URL}/link_portals/${id}/mfa?institution=${institution}`,
+          `${
+            import.meta.env.VITE_API_URL
+          }/link_portals/${id}/mfa?institution=${institution}`,
           formData
         )
         .then(() => {
+          setErrorMessage(null);
           navigate(`/link_portals/success/`);
         })
         .catch((err) => {
-          console.log(err.message);
+          if (err.response.status === 400) {
+            setErrorMessage("Invalid mfa code.");
+          } else if (err.response.status === 409) {
+            navigate(`/link_portals/${id}/already_linked/`);
+          }
+        })
+        .finally(() => {
           setLoading(false);
         });
     }
-    setInvalidSubmission(false);
+    setSchemaError(false);
   };
 
   return (
     <Card>
       <form
         className={globalStyles.container}
-        onSubmit={handleSubmit(onSubmit, () => setInvalidSubmission(true))}
+        onSubmit={handleSubmit(onSubmit, () => setSchemaError(true))}
       >
         <div
           className={[globalStyles.logoContainer, styles.logoContainer].join(
@@ -120,6 +135,17 @@ const Login = () => {
           By providing your credentials, you're enabling Opentrade to retrieve
           your investment data.
         </p>
+        {errorMessage && (
+          <div className={styles.errorContainer}>
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              className={styles.errorIcon}
+            />
+            <p className={[globalStyles.text, styles.errorText].join(" ")}>
+              {errorMessage}
+            </p>
+          </div>
+        )}
         <input
           {...register("email")}
           type="text"
@@ -128,8 +154,10 @@ const Login = () => {
           className={styles.inputField}
           // name?
         />
-        {errors.email && invalidSubmission && (
-          <p className={[globalStyles.text, styles.errorText].join(" ")}>{errors.email.message}</p>
+        {errors.email && schemaError && (
+          <p className={[globalStyles.text, styles.errorText].join(" ")}>
+            {errors.email.message}
+          </p>
         )}
         <input
           {...register("password")}
@@ -138,8 +166,10 @@ const Login = () => {
           placeholder="Password"
           className={styles.inputField}
         />
-        {errors.password && invalidSubmission && (
-          <p className={[globalStyles.text, styles.errorText].join(" ")}>{errors.password.message}</p>
+        {errors.password && schemaError && (
+          <p className={[globalStyles.text, styles.errorText].join(" ")}>
+            {errors.password.message}
+          </p>
         )}
         {displayMFA && (
           <input
@@ -150,8 +180,10 @@ const Login = () => {
             className={styles.inputField}
           />
         )}
-        {errors.mfaCode && invalidSubmission && (
-          <p className={[globalStyles.text, styles.errorText].join(" ")}>{errors.mfaCode.message}</p>
+        {errors.mfaCode && schemaError && (
+          <p className={[globalStyles.text, styles.errorText].join(" ")}>
+            {errors.mfaCode.message}
+          </p>
         )}
         <button
           className={globalStyles.button}

@@ -32,7 +32,9 @@ const Linking = () => {
         navigate(`/link_portals/success/`);
       })
       .catch((err) => {
-        console.log(err.message);
+        if (err.response.status === 409) {
+          navigate(`/link_portals/${id}/already_linked/`);
+        }
       });
 
     return () => controller.abort();

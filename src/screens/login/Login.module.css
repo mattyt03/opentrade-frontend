@@ -14,7 +14,7 @@
 }
 
 .errorText {
-  color: var(--text-color-danger);
+  color: var(--color-danger);
 }
 
 .inputField {
@@ -44,4 +44,22 @@
   text-align: center;
   font-size: 0.9rem;
   font-weight: normal;
+}
+
+.errorContainer {
+  align-self: start;
+  display: flex;
+  background-color: var(--color-light);
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.errorIcon {
+  font-size: 1.4rem;
+  margin-right: 0.5rem;
+}
+
+.errorIcon > path {
+  color: var(--color-danger);
 }

@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // shield check is a premium icon
-import { faXmark, faLink } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faLink } from "@fortawesome/pro-solid-svg-icons";
 import {
   faShieldCheck,
   faArrowsLeftRight,

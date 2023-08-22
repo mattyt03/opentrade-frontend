@@ -1,13 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;650;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;550;600;650;700&display=swap");
 
 :root {
   --color-background: rgba(144, 144, 144, 0.98);
   --color-card: white;
   --color-primary: #6936f5;
+  --color-light: #eaecee;
   --color-border: #ededed;
+  --color-danger: #dc3545;
   --text-color-primary: #333;
   --text-color-light: #777;
-  --text-color-danger: #dc3545;
   --border-radius: 8px;
 }
 
@@ -61,7 +62,6 @@ body {
   width: 100%;
   height: 3rem;
   margin: 1rem;
-  /* margin-bottom: 0; */
   border: 0;
   border-radius: 2rem;
   color: var(--color-card);
