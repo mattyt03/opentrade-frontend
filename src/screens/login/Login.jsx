@@ -63,7 +63,7 @@ const Login = () => {
     if (displayMFA === false) {
       axios
         .post(
-          `${import.meta.env.VITE_API_URL}/link_portals/${id}/login`,
+          `${import.meta.env.VITE_API_URL}/link_portals/${id}/login?institution=${institution}`,
           formData
         )
         .then(({ data }) => {
@@ -81,7 +81,7 @@ const Login = () => {
       formData.append("device_token", deviceToken);
       axios
         .post(
-          `${import.meta.env.VITE_API_URL}/link_portals/${id}/mfa`,
+          `${import.meta.env.VITE_API_URL}/link_portals/${id}/mfa?institution=${institution}`,
           formData
         )
         .then(() => {
