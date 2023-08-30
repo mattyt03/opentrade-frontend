@@ -27,9 +27,10 @@ const Institution = ({ institution, lp_id }) => {
         <h3 className={styles.name}>{institution.name}</h3>
         <p className={styles.link}>{institution.link}</p>
       </div>
-      <div className={styles.chevronContainer}>
+      {!institution.operational && <div className={styles.badge}>COMING SOON</div>}
+      {institution.operational && <div className={styles.chevronContainer}>
         <FontAwesomeIcon className={styles.chevron} icon={faChevronRight} />
-      </div>
+      </div>}
     </InstitutionLink>
   );
 };

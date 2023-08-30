@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowsLeftRight } from "@fortawesome/pro-solid-svg-icons";
+import { faArrowsLeftRight, faTruckMedical, faTrumpet } from "@fortawesome/pro-solid-svg-icons";
 import { ReactComponent as Logo } from "../../assets/opentrade_logo_white.svg";
 import { Ring } from "@uiball/loaders";
 import { useForm } from "react-hook-form";
@@ -12,7 +12,7 @@ import Card from "../../components/card";
 import institution_data from "../../data/institutions";
 import styles from "./Login.module.css";
 import globalStyles from "../../Styles.module.css";
-import { faCircleXmark } from "@fortawesome/pro-regular-svg-icons";
+import { faCircleXmark, faTruckField, faTruckFieldUn } from "@fortawesome/pro-regular-svg-icons";
 
 // refactor axios requests
 // make a custom hook for login
@@ -37,8 +37,6 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [displayMFA, setDisplayMFA] = useState(false);
-  // add to local storage?
-  const [deviceToken, setDeviceToken] = useState("");
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -57,11 +55,12 @@ const Login = () => {
     // console.log(data);
     setLoading(true);
 
-    const formData = new FormData();
-    formData.append("email", data.email);
-    formData.append("password", data.password);
+    // const formData = new FormData();
+    // formData.append("email", data.email);
+    // formData.append("password", data.password);
 
     if (displayMFA === false) {
+      const formData = { email: data.email, password: data.password };
       axios
         .post(
           `${
@@ -71,20 +70,26 @@ const Login = () => {
         )
         .then(({ data }) => {
           setDisplayMFA(true);
-          setDeviceToken(data.device_token);
+          localStorage.setItem("device_token", data.device_token);
           setErrorMessage(null);
         })
         .catch((err) => {
           if (err.response.status === 400) {
-            setErrorMessage("Invalid username or password.");
+            setErrorMessage("Invalid username or password");
           }
         })
         .finally(() => {
           setLoading(false);
         });
     } else {
-      formData.append("mfa_code", data.mfaCode);
-      formData.append("device_token", deviceToken);
+      // formData.append("mfa_code", data.mfaCode);
+      // formData.append("device_token", deviceToken);
+      const formData = {
+        email: data.email,
+        password: data.password,
+        mfa_code: data.mfaCode,
+        device_token: localStorage.getItem("device_token"),
+      };
       axios
         .post(
           `${
@@ -98,7 +103,8 @@ const Login = () => {
         })
         .catch((err) => {
           if (err.response.status === 400) {
-            setErrorMessage("Invalid mfa code.");
+            console.log(err.response);
+            setErrorMessage("Invalid mfa code");
           } else if (err.response.status === 409) {
             navigate(`/link_portals/${id}/already_linked/`);
           }

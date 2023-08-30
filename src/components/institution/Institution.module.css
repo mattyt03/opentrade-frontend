@@ -25,6 +25,18 @@
   color: var(--text-color-light);
 }
 
+.badge {
+  background-color: #D5F5E3;
+  color: #28B463;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6rem;
+  font-weight: 600;
+  width: 4rem;
+  margin-left: auto;
+  text-align: center;
+}
+
 .chevronContainer {
   margin-right: 1rem;
   margin-left: auto;

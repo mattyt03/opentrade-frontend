@@ -15,6 +15,7 @@ const institution_data = {
     forgot_password_link: null,
     color: "#004022",
     redirect: false,
+    operational: true,
   },
   tda: {
     name: "TD Ameritrade",
@@ -23,6 +24,7 @@ const institution_data = {
     forgot_password_link: null,
     color: "#00b625",
     redirect: true,
+    operational: true,
   },
   etrade: {
     name: "E*Trade",
@@ -31,6 +33,7 @@ const institution_data = {
     forgot_password_link: null,
     color: "#6633cc",
     redirect: true,
+    operational: true,
   },
   coinbase: {
     name: "Coinbase",
@@ -39,6 +42,7 @@ const institution_data = {
     forgot_password_link: null,
     color: "#0052ff",
     redirect: true,
+    operational: true,
   },
   schwab: {
     name: "Charles Schwab",
@@ -47,6 +51,7 @@ const institution_data = {
     forgot_password_link: null,
     color: "#00a0de",
     redirect: false,
+    operational: false,
   },
   fidelity: {
     name: "Fidelity",
@@ -55,6 +60,7 @@ const institution_data = {
     forgot_password_link: null,
     color: "#128741",
     redirect: false,
+    operational: false,
   },
   binance: {
     name: "Binance",
@@ -63,6 +69,7 @@ const institution_data = {
     forgot_password_link: null,
     color: "#212227",
     redirect: false,
+    operational: false,
   },
   ib: {
     name: "Interactive Brokers",
@@ -71,6 +78,7 @@ const institution_data = {
     forgot_password_link: null,
     color: "#d81222",
     redirect: false,
+    operational: false,
   },
 };
 
