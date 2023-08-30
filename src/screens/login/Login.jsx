@@ -55,12 +55,12 @@ const Login = () => {
     // console.log(data);
     setLoading(true);
 
-    // const formData = new FormData();
-    // formData.append("email", data.email);
-    // formData.append("password", data.password);
+    const formData = new FormData();
+    formData.append("email", data.email);
+    formData.append("password", data.password);
 
     if (displayMFA === false) {
-      const formData = { email: data.email, password: data.password };
+      // const formData = { email: data.email, password: data.password };
       axios
         .post(
           `${
@@ -82,14 +82,14 @@ const Login = () => {
           setLoading(false);
         });
     } else {
-      // formData.append("mfa_code", data.mfaCode);
-      // formData.append("device_token", deviceToken);
-      const formData = {
-        email: data.email,
-        password: data.password,
-        mfa_code: data.mfaCode,
-        device_token: localStorage.getItem("device_token"),
-      };
+      formData.append("mfa_code", data.mfaCode);
+      formData.append("device_token", localStorage.getItem("device_token"));
+      // const formData = {
+      //   email: data.email,
+      //   password: data.password,
+      //   mfa_code: data.mfaCode,
+      //   device_token: localStorage.getItem("device_token"),
+      // };
       axios
         .post(
           `${
@@ -103,7 +103,6 @@ const Login = () => {
         })
         .catch((err) => {
           if (err.response.status === 400) {
-            console.log(err.response);
             setErrorMessage("Invalid mfa code");
           } else if (err.response.status === 409) {
             navigate(`/link_portals/${id}/already_linked/`);
